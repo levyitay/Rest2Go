@@ -59,7 +59,13 @@ public class Rest2Go extends Activity {
 			@Override
 			public void onClick(View v) {
 				showCurrentLocation();
-				ConnectToServer();
+				try {
+					ConnectToServer();
+				} catch (UnknownHostException e) {
+					Log.e("[Rest2Go] ","Error Connecting to Server:"+e.getMessage());
+				} catch (IOException e) {
+					Log.e("[Rest2Go] ","Error Connecting to Server:"+e.getMessage());
+				}
 				SendLocInfo();
 				
 			}
@@ -69,33 +75,30 @@ public class Rest2Go extends Activity {
     private void SendLocInfo()
     {
     	try{
-    	out.writeDouble(this.cLongitude);
-    	out.writeDouble(this.cLatitude);
+    	if (out!=null){
+	    	out.writeDouble(this.cLongitude);
+	    	out.writeDouble(this.cLatitude);
+    	}
     	}catch(IOException e){
     		Log.e("[Rest2Go] ","Error Sending to Server:"+e.getMessage());
 			
     	}
     	
     	
+    	
     }
     
-    private void ConnectToServer() 
+    private void ConnectToServer() throws UnknownHostException, IOException
     {
-    	SocketAddress serverAdd = new InetSocketAddress(SERVER_IP,SERVER_PORT);
+    	SocketAddress serverAdd = new InetSocketAddress("10.10.0.172",SERVER_PORT);    	
     	
-    	try {
 			m_ClientSocket = new Socket();
 			m_ClientSocket.connect(serverAdd);
 			in = new DataInputStream(m_ClientSocket.getInputStream());
 			out = new DataOutputStream(m_ClientSocket.getOutputStream());
 			Log.i("[Rest2Go] ", in.readUTF());
 			
-		} catch (UnknownHostException e) {
-			Log.e("[Rest2Go] ","Error Connecting to Server:"+e.getMessage());
-			
-		} catch (IOException e) {
-			Log.e("[Rest2Go] ","Error Connecting to Server:"+e.getMessage());
-		}
+		
 		
     }
     
