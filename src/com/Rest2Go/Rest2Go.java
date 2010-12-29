@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Toast;
 
 
@@ -27,6 +28,7 @@ public class Rest2Go extends Activity {
 	protected LocationManager locationManager;
 
 	protected Button btnGetLoc;
+	protected ListView listView;
 	
 	private static final long MINIMUM_DISTANCE_CHANGE_FOR_UPDATES = 1; // in Meters
 	private static final long MINIMUM_TIME_BETWEEN_UPDATES = 1000; // in Milliseconds
@@ -36,17 +38,19 @@ public class Rest2Go extends Activity {
 	
 	private double cLongitude;
 	private double cLatitude;
+	private String RestXML;
 	
 	private Socket m_ClientSocket;
 	private DataInputStream in;
 	private DataOutputStream out;
+	
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(com.Rest2Go.R.layout.main);
         
-
+        listView = (ListView) findViewById(com.Rest2Go.R.id.ListView01);
         btnGetLoc = (Button) findViewById(com.Rest2Go.R.id.BtnGetLoc);
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         
@@ -63,26 +67,45 @@ public class Rest2Go extends Activity {
 					ConnectToServer();
 				} catch (UnknownHostException e) {
 					Log.e("[Rest2Go] ","Error Connecting to Server:"+e.getMessage());
+					try {
+						m_ClientSocket.close();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				} catch (IOException e) {
 					Log.e("[Rest2Go] ","Error Connecting to Server:"+e.getMessage());
+					try {
+						m_ClientSocket.close();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
-				SendLocInfo();
+				try {
+					SendLocInfo();
+					RestXML = in.readUTF();
+										
+					m_ClientSocket.close();
+					
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 				
 			}
 		});
     }
     
-    private void SendLocInfo()
+    private void SendLocInfo() throws IOException
     {
-    	try{
+    	
     	if (out!=null){
 	    	out.writeDouble(this.cLongitude);
 	    	out.writeDouble(this.cLatitude);
     	}
-    	}catch(IOException e){
-    		Log.e("[Rest2Go] ","Error Sending to Server:"+e.getMessage());
-			
-    	}
+    	
     	
     	
     	
@@ -90,7 +113,7 @@ public class Rest2Go extends Activity {
     
     private void ConnectToServer() throws UnknownHostException, IOException
     {
-    	SocketAddress serverAdd = new InetSocketAddress("10.10.0.172",SERVER_PORT);    	
+    		SocketAddress serverAdd = new InetSocketAddress("10.10.0.169",SERVER_PORT);    	
     	
 			m_ClientSocket = new Socket();
 			m_ClientSocket.connect(serverAdd);
