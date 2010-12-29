@@ -1,12 +1,14 @@
 package com.Rest2Go;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
 import java.net.UnknownHostException;
+
+import org.w3c.dom.Document;
 
 import android.R;
 import android.app.Activity;
@@ -38,11 +40,12 @@ public class Rest2Go extends Activity {
 	
 	private double cLongitude;
 	private double cLatitude;
-	private String RestXML;
+	private Document RestXML;
 	
 	private Socket m_ClientSocket;
-	private DataInputStream in;
-	private DataOutputStream out;
+//	private DataInputStream in;
+	private ObjectInputStream in;
+	private ObjectOutputStream out;
 	
 
     @Override
@@ -81,14 +84,20 @@ public class Rest2Go extends Activity {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 				try {
 					SendLocInfo();
-					RestXML = in.readUTF();
-										
+					Document RestXML = (Document) in.readObject();
+					
 					m_ClientSocket.close();
 					
 				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ClassNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
@@ -102,8 +111,8 @@ public class Rest2Go extends Activity {
     {
     	
     	if (out!=null){
-	    	out.writeDouble(this.cLongitude);
-	    	out.writeDouble(this.cLatitude);
+	    	out.writeObject(this.cLongitude);
+	    	out.writeObject(this.cLatitude);
     	}
     	
     	
@@ -111,15 +120,15 @@ public class Rest2Go extends Activity {
     	
     }
     
-    private void ConnectToServer() throws UnknownHostException, IOException
+    private void ConnectToServer() throws UnknownHostException, IOException, ClassNotFoundException
     {
-    		SocketAddress serverAdd = new InetSocketAddress("10.10.0.169",SERVER_PORT);    	
+    		SocketAddress serverAdd = new InetSocketAddress("10.10.0.165",SERVER_PORT);    	
     	
 			m_ClientSocket = new Socket();
 			m_ClientSocket.connect(serverAdd);
-			in = new DataInputStream(m_ClientSocket.getInputStream());
-			out = new DataOutputStream(m_ClientSocket.getOutputStream());
-			Log.i("[Rest2Go] ", in.readUTF());
+			in = new ObjectInputStream(m_ClientSocket.getInputStream());
+			out = new ObjectOutputStream(m_ClientSocket.getOutputStream());
+			Log.i("[Rest2Go] ", (String)in.readObject());
 			
 		
 		
