@@ -9,6 +9,12 @@ import java.net.SocketAddress;
 import java.net.UnknownHostException;
 
 import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
+
+import com.Rest2Go.Utils.xmlBuilder;
+
+import javax.xml.*;
+import javax.xml.parsers.ParserConfigurationException;
 
 import android.R;
 import android.app.Activity;
@@ -36,7 +42,7 @@ public class Rest2Go extends Activity {
 	private static final long MINIMUM_TIME_BETWEEN_UPDATES = 1000; // in Milliseconds
 	
 	private static final String SERVER_IP="127.0.0.1";
-	private static int SERVER_PORT = 5555;
+	private static int SERVER_PORT = 6666;
 	
 	private double cLongitude;
 	private double cLatitude;
@@ -90,17 +96,21 @@ public class Rest2Go extends Activity {
 				}
 				try {
 					SendLocInfo();
-					Document RestXML = (Document) in.readObject();
-					
+				
+					Document restXMLDocument = xmlBuilder.buildXMLFromString(in.readUTF());
+				
 					m_ClientSocket.close();
 					
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				} catch (ClassNotFoundException e) {
+				} catch (ParserConfigurationException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}
+				} catch (SAXException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
 				
 				
 			}
@@ -122,7 +132,7 @@ public class Rest2Go extends Activity {
     
     private void ConnectToServer() throws UnknownHostException, IOException, ClassNotFoundException
     {
-    		SocketAddress serverAdd = new InetSocketAddress("10.10.0.165",SERVER_PORT);    	
+    		SocketAddress serverAdd = new InetSocketAddress("192.168.1.2",SERVER_PORT);    	
     	
 			m_ClientSocket = new Socket();
 			m_ClientSocket.connect(serverAdd);
