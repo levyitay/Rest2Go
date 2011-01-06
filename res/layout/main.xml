@@ -4,16 +4,22 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     >
+<!--  
+<Button android:layout_width="wrap_content" 
+android:id="@+id/BtnGetLoc" 
+android:text="Get Location" 
+android:layout_height="wrap_content">
+</Button>-->
 
-<Button android:text="Get Location" 
-		android:id="@+id/BtnGetLoc" 
-		android:layout_width="wrap_content" 
-		android:layout_height="wrap_content">
-</Button>
+
+<ListView
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/lstText"
+    />
 
 
-	<ListView android:id="@+id/ListView01" 
-		android:layout_width="wrap_content" 
-		android:layout_height="wrap_content">
-	</ListView>
+
+
+
 </LinearLayout>
