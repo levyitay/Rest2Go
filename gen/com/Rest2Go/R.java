@@ -11,18 +11,44 @@ public final class R {
     public static final class attr {
     }
     public static final class drawable {
-        public static final int icon=0x7f020000;
+        public static final int btn_default_normal=0x7f020000;
+        public static final int btn_default_pressed=0x7f020001;
+        public static final int btn_default_selected=0x7f020002;
+        public static final int button=0x7f020003;
+        public static final int by_location=0x7f020004;
+        public static final int icon=0x7f020005;
+        public static final int round_button_shape=0x7f020006;
     }
     public static final class id {
-        public static final int lstText=0x7f050004;
-        public static final int txtRestAddress=0x7f050001;
-        public static final int txtRestName=0x7f050000;
-        public static final int txtRestPhone=0x7f050002;
-        public static final int txtRestPhone2=0x7f050003;
+        public static final int Exit=0x7f060012;
+        public static final int LinearLayout01=0x7f060001;
+        public static final int back_button=0x7f060009;
+        public static final int icon=0x7f060000;
+        public static final int lstText=0x7f060006;
+        public static final int menu_button=0x7f060008;
+        public static final int radio_group=0x7f06000b;
+        public static final int restImg=0x7f060007;
+        public static final int rest_rad_btn=0x7f06000a;
+        public static final int rest_text=0x7f06000d;
+        public static final int rest_textview=0x7f06000e;
+        public static final int search_btn=0x7f060011;
+        public static final int street_rad_btn=0x7f06000c;
+        public static final int street_text=0x7f06000f;
+        public static final int street_textview=0x7f060010;
+        public static final int txtRestAddress=0x7f060003;
+        public static final int txtRestName=0x7f060002;
+        public static final int txtRestPhone=0x7f060004;
+        public static final int txtRestPhone2=0x7f060005;
     }
     public static final class layout {
         public static final int listitems=0x7f030000;
-        public static final int main=0x7f030001;
+        public static final int location_layout=0x7f030001;
+        public static final int restaurant_layout=0x7f030002;
+        public static final int search_layout=0x7f030003;
+        public static final int tab_layout=0x7f030004;
+    }
+    public static final class menu {
+        public static final int menu=0x7f050000;
     }
     public static final class string {
         public static final int app_name=0x7f040001;

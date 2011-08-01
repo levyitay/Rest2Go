@@ -1,25 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent" android:layout_height="fill_parent">
-    <LinearLayout
-    android:orientation="vertical"
-    android:layout_width="0dip" android:layout_weight="1"
-    android:layout_height="fill_parent">
-        <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtRestName" />
-        <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtRestAddress" />
-        <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtRestPhone" />
-        <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtRestPhone2" />
-    </LinearLayout>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="wrap_content"
+	android:orientation="horizontal"
+	android:gravity="left|center_vertical">
+	
+	<ImageView
+	android:layout_width="70dip"
+	android:layout_height="70dip"
+	android:id="@+id/icon"
+	android:src="@drawable/icon"
+	android:gravity="left" />
+	
+
+	<LinearLayout
+		android:orientation="vertical"
+		android:layout_height="wrap_content"
+		android:id="@+id/LinearLayout01"
+		android:layout_width="fill_parent"
+		android:gravity="right">
+		<TextView
+			android:text="txtRestName"
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:id="@+id/txtRestName"></TextView>
+		<TextView
+			android:text="txtRestAddress"
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:id="@+id/txtRestAddress"></TextView>
+		<TextView
+			android:text="txtRestPhone"
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:id="@+id/txtRestPhone"></TextView>
+		<TextView
+			android:text="txtRestPhone2"
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:id="@+id/txtRestPhone2"></TextView>
+	</LinearLayout>
 </LinearLayout>

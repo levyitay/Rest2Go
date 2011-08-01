@@ -1,19 +1,32 @@
 package com.Rest2Go;
 
-class RestData{
-	public String name;
-	public String Address;
-	public String phone;
-	public String phone2;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+
+public class RestData{
+	public long mId;
+	public String mName;
+	public String mAddress;
+	public String mPhone;
+	public String mPhone2;
+	public String mImgUrl;
+	public Drawable mIconDraw; 
+	public Drawable mImageDraw;
 	
-	public RestData(String _name, String _Address, String _phone, String _phone2 )
+	public RestData(long id, String name, String address, String phone, String phone2,String imgURL, BitmapDrawable iconDraw )
 	{
-		this.name=_name;
-		this.Address = _Address;
-		if (_phone!=null)
-			this.phone = _phone;
-		if (_phone2!=null)
-			this.phone2 = _phone2;
+		this.mId = id;
+		this.mName=name;
+		this.mAddress = address;
+		if (phone!=null)
+			this.mPhone = phone;
+		if (phone2!=null)
+			this.mPhone2 = phone2;
+		if (iconDraw!=null){
+			this.mIconDraw = iconDraw;
+		}else{
+			this.mIconDraw = null;
+		}
 		
 	}
 	
